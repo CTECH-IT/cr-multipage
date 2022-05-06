@@ -29,16 +29,27 @@
 
     // go through the orders with a loop
     // figure out if this order belongs to you, 
-    // if it does, create a new order and then call
+    // if it does, add it to the checklist
 
     Object.entries(orders).forEach((entry) => {
+
+      let validOrder = false; // check to see if it's mine
+
       const [key, value] = entry;
       console.log(`got order: ** ${key}: ${value} **`);
       Object.entries(value).forEach((field) => {
         const [k, v] = field;
         console.log(`----- ${k}: ${v}`);
+
+        if (v == 'mrb') {
+          validOrder = true;
+        }
       });
-      checkList.addRow.call(checkList, value); // don't add rows now, since we moved the checklist to the manager page.
+
+      if (validOrder == true) {
+        checkList.addRow.call(checkList, value); // don't add rows now, since we moved the checklist to the manager page.
+      }
+
     });
 
 

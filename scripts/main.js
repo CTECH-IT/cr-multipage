@@ -44,16 +44,10 @@
 
   // find the form that is being submitted and create a FormHandler object
   let formHandler = new FormHandler(FORM_SELECTOR);
-  // find the checklist that is being updated and create a CheckList object
-  let checkList = new CheckList(CHECKLIST_SELECTOR);
-
-  // when a checkbox is clicked, call "deliverOrder" on myTruck
-  checkList.addClickHandler(myTruck.deliverOrder.bind(myTruck));
 
   // when the submit button is called, create the order and add a checkbox
   formHandler.addSubmitHandler(function (data) {
     myTruck.createOrder.call(myTruck, data);
-    // checkList.addRow.call(checkList, data); don't add rows now, since we moved the checklist to the manager page.
   });
 
   // add the email validator to the email input field
