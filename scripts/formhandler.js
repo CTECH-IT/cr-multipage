@@ -6,7 +6,7 @@
 
   // This is the FormHandler constructor
   function FormHandler(selector) {
-    
+
     // do stuff here
     if (!selector) {
       throw new Error('No selector provided!');
@@ -22,7 +22,7 @@
   FormHandler.prototype.addSubmitHandler = function (func) {
     console.log('Setting submit handler for form');
     this.$formElement.on('submit', function (event) {
-      event.preventDefault();  
+      event.preventDefault();
 
       // get the data from the form and store it in a data object
       let data = {};
@@ -30,6 +30,9 @@
         data[item.name] = item.value;
         console.log(item.name + ' is ' + item.value);
       });
+
+      data['mycode'] = 'mrb'; // add a special code since we are all using the same data store
+
       console.log(data);
       func(data); // call the function that was passed in on the data from the form
 
@@ -41,11 +44,11 @@
   FormHandler.prototype.addInputHandler = function (func) {
     console.log('Setting input handler for form');
     this.$formElement.on('input', '[name="emailAddress"]', function (event) {
-      let emailAddress = event.target.value;      
+      let emailAddress = event.target.value;
       if (func(emailAddress) == true) { // use validation.js to check email
         event.target.setCustomValidity('');
       } else {
-        event.target.setCustomValidity(emailAddress + ' is not an authorized email address!');    
+        event.target.setCustomValidity(emailAddress + ' is not an authorized email address!');
       }
     });
   };
