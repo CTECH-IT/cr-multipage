@@ -19,10 +19,10 @@
   // the remote database where we store orders
   let remoteDS = new RemoteDataStore(SERVER_URL);
 
-  let myTruck = new Truck('12345', remoteDS); 
+  let myTruck = new Truck('12345', remoteDS);
   window.myTruck = myTruck;
 
-// get all the data from the remote data store and put it in the truck
+  // get all the data from the remote data store and put it in the truck
   remoteDS.getAll(function (orders) {
 
     // go through the orders with a loop
@@ -37,9 +37,9 @@
         console.log(`----- ${k}: ${v}`);
       });
     });
-    
 
-  }); 
+
+  });
 
 
   // find the form that is being submitted and create a FormHandler object
@@ -53,10 +53,10 @@
   // when the submit button is called, create the order and add a checkbox
   formHandler.addSubmitHandler(function (data) {
     myTruck.createOrder.call(myTruck, data);
-    checkList.addRow.call(checkList, data);
+    // checkList.addRow.call(checkList, data); don't add rows now, since we moved the checklist to the manager page.
   });
 
   // add the email validator to the email input field
-  formHandler.addInputHandler(Validation.isCompanyEmail); 
+  formHandler.addInputHandler(Validation.isCompanyEmail);
 
 })(window); 
